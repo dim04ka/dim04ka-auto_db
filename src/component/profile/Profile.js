@@ -9,9 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { Link } from "react-router-dom";
 
-import MaterialUiForm from './Test';
-import Test2 from "./Test2"
-
+//import MaterialUiForm from './Test';
 import PhoneInput from '../../../node_modules/react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
@@ -35,16 +33,10 @@ export default function Profile(props){
     }
 
     const [phone, setPhone] = useState('')
-    const [phone2, setPhone2] = useState('')
 
-    const submitt = values => {
-        window.alert (JSON.stringify (values));
-      };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(e);
-    }
+    // const submitt = values => {
+    //     window.alert (JSON.stringify (values));
+    //   };
 
     return(
         <>
@@ -90,39 +82,20 @@ export default function Profile(props){
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
                         }}
-                        />
+                        /> 
                     </Grid>
                 </MuiPickersUtilsProvider>
                 <FormControl>
                     <TextField id="profile-maprod" label="Место рождения" variant="outlined" />
                 </FormControl>
-                <FormControl>      
-                    <PhoneInput
-                        country='by'
-                        regions={'europe'}
-                        onlyCountries={['ru', 'ua', 'by']}
-                        value={phone}
-                        onChange={phone => setPhone(phone)}
-                    />
-                </FormControl>
-                <div>{phone}</div>
-                <hr />
-                <FormControl> 
-                    <div>Дополнительный телефон</div>     
-                    <PhoneInput
-                        country='by'
-                        regions={'europe'}
-                        onlyCountries={['ru', 'ua', 'by']}
-                        value={phone2}
-                        onChange={phone => setPhone2(phone)}
-                    />
-                </FormControl>
-           
-                <div>{phone2}</div>
-
-
-
-
+                <PhoneInput
+                    country='by'
+                    regions={'europe'}
+                    onlyCountries={['ru', 'ua', 'by']}
+                    value={phone}
+                    onChange={phone => setPhone(phone)}
+                />
+                <adress>{phone}</adress>
 
 
                 <Divider />
@@ -135,7 +108,6 @@ export default function Profile(props){
                 </FormControl>
             </form>
             {/* <MaterialUiForm onSubmit={submitt}/> */}
-            <Test2 handleSubmit={handleSubmit}/> />
         </Container>
         </>
     )
