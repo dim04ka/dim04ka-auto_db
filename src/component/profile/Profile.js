@@ -10,6 +10,8 @@ import DateFnsUtils from '@date-io/date-fns';
 import { Link } from "react-router-dom";
 
 import MaterialUiForm from './Test';
+import Test2 from "./Test2"
+
 import PhoneInput from '../../../node_modules/react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
@@ -33,10 +35,16 @@ export default function Profile(props){
     }
 
     const [phone, setPhone] = useState('')
+    const [phone2, setPhone2] = useState('')
 
     const submitt = values => {
         window.alert (JSON.stringify (values));
       };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(e);
+    }
 
     return(
         <>
@@ -88,15 +96,29 @@ export default function Profile(props){
                 <FormControl>
                     <TextField id="profile-maprod" label="Место рождения" variant="outlined" />
                 </FormControl>
-                <PhoneInput
-                    country='by'
-                    regions={'europe'}
-                    onlyCountries={['ru', 'ua', 'by']}
-                    value={phone}
-                    onChange={phone => setPhone(phone)}
-                />
-                <adress>{phone}</adress>
-
+                <FormControl>      
+                    <PhoneInput
+                        country='by'
+                        regions={'europe'}
+                        onlyCountries={['ru', 'ua', 'by']}
+                        value={phone}
+                        onChange={phone => setPhone(phone)}
+                    />
+                </FormControl>
+                <div>{phone}</div>
+                <hr />
+                <FormControl> 
+                    <div>Дополнительный телефон</div>     
+                    <PhoneInput
+                        country='by'
+                        regions={'europe'}
+                        onlyCountries={['ru', 'ua', 'by']}
+                        value={phone2}
+                        onChange={phone => setPhone2(phone)}
+                    />
+                </FormControl>
+           
+                <div>{phone2}</div>
 
 
 
@@ -112,7 +134,8 @@ export default function Profile(props){
                     <Button type="submit" variant="contained" color="primary">Добавить</Button>
                 </FormControl>
             </form>
-            <MaterialUiForm onSubmit={submitt}/>
+            {/* <MaterialUiForm onSubmit={submitt}/> */}
+            <Test2 handleSubmit={handleSubmit}/> />
         </Container>
         </>
     )

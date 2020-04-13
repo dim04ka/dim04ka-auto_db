@@ -7,7 +7,21 @@ const initialState = {
     },
     b: {
         count: 100
-    }
+    },
+    drivers: [
+        {
+            id: 1,
+            fio: 'Ivanov Ivan Ivanon',
+            phone: 8139878,
+            region: 'Minks'
+        },
+        {
+            id: 2,
+            fio: '2Ivanov Ivan Ivanon',
+            phone: 28139878,
+            region: 'Minks'
+        }
+    ]
 };
 
 const userReducer = (state = initialState, action) => {

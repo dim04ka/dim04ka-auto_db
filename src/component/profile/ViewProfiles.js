@@ -11,11 +11,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {useSelector} from 'react-redux';
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
   } from "react-router-dom";
 
@@ -26,20 +24,14 @@ const useStyles = makeStyles({
     },
   });
   
-  function createData(fio, tel, region) {
-    return { fio, tel, region };
-  }
-  
-  const rows = [
-    createData('Петров ИВан ИВанович', +37529813123123, 'Минск'),
-    createData('Иванов Коля Петрович', +37529613123123, 'Минск'),
-  ];
-
+ 
 const ViewProfile = () => {
 
     const { push } = useHistory();
 
     const classes = useStyles();
+    let drivers = useSelector(state => state.driverFormReducer.drivers)
+    
 
     return(
         <Container> 
@@ -67,7 +59,7 @@ const ViewProfile = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {rows.map((row,idx) => (
+                    {drivers.map((row,idx) => (
                         <TableRow key={row.fio}>
                         <TableCell component="th" scope="row">
                             {idx +1}
@@ -75,7 +67,7 @@ const ViewProfile = () => {
                         <TableCell align="left">
                             {row.fio}
                         </TableCell>
-                        <TableCell align="left">{row.tel}</TableCell>
+                        <TableCell align="left">{row.phone}</TableCell>
                         <TableCell align="left">{row.region}</TableCell>
                         <TableCell><button>Click</button> </TableCell>
                         </TableRow>
