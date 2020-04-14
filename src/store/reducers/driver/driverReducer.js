@@ -11,15 +11,23 @@ const initialState = {
     drivers: [
         {
             id: 1,
-            fio: 'Ivanov Ivan Ivanon',
-            phone: 8139878,
-            region: 'Minks'
+            family: 'Иванов',
+            name: 'Сергей',
+            lastname: 'Крузенштерн',
+            gender: 'M',
+            dateBirthday: '05.12.1992',
+            phone: '+375(29)8139878',
+            phoneDop : ''
         },
         {
-            id: 2,
-            fio: '2Ivanov Ivan Ivanon',
-            phone: 28139878,
-            region: 'Minks'
+            id: 1,
+            family: 'Петровa',
+            name: 'Василиса',
+            lastname: 'Васильевична',
+            gender: 'Ж',
+            dateBirthday: '01.02.1991',
+            phone: '+375(29)3323938',
+            phoneDop : ''
         }
     ]
 };
@@ -28,8 +36,11 @@ const userReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_DRIVER:
-            console.log('ADD_DRIVER')
-            return state
+            console.log('ADD_DRIVER', action.payload)
+            return {
+                ...state, 
+                drivers: [...state.drivers, action.payload] 
+                }
         case 'increment-counter':
             
             return {

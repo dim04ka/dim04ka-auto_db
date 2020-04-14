@@ -31,6 +31,10 @@ const ViewProfile = () => {
 
     const classes = useStyles();
     let drivers = useSelector(state => state.driverFormReducer.drivers)
+
+    const read = (id) => {
+        push('/view-profile/'+id)
+    }
     
 
     return(
@@ -65,11 +69,11 @@ const ViewProfile = () => {
                             {idx +1}
                         </TableCell>
                         <TableCell align="left">
-                            {row.fio}
+                            {row.fio + '(' + row.id + ')'}
                         </TableCell>
                         <TableCell align="left">{row.phone}</TableCell>
                         <TableCell align="left">{row.region}</TableCell>
-                        <TableCell><button>Click</button> </TableCell>
+                        <TableCell><button onClick={() => read(row.id)}>Click</button> </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>

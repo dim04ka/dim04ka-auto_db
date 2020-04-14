@@ -5,11 +5,13 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import ViewProfile from './component/profile/ViewProfiles'
+//import ViewProfile from './component/profile/ViewProfiles'
 
 import Profile from './component/profile/Profile';
 import Header from './component/header/Header';
-import Home from './component/Home/Home'
+import Home from './component/Home/Home';
+//import ViewProfileDriver from './component/profile/ViewProfileDriver';
+import ViewDrivers from './component/profile/ViewDrivers';
 
 export default function App() {
 
@@ -21,9 +23,13 @@ export default function App() {
         <Switch>
             <Route path="/" exact component={Home}></Route>
             <Route path="/profile">
-              <Profile step={3} />
+              <Profile/>
             </Route>
-            <Route path="/view-profile" component={ViewProfile}></Route>
+            <Route patch='/view-profile' >
+              <ViewDrivers />
+            </Route>
+            {/* <Route path="/view-profile" component={ViewProfile}></Route>
+            <Route path="/view-profile/:id" component={ViewProfileDriver}></Route> */}
           </Switch>
       </Router>
     </>

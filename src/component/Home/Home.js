@@ -1,17 +1,19 @@
 import React from 'react';
 import {Container, Button} from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
+import {useHistory} from 'react-router-dom';
 
 
      
 const  Home = (props) => {
+    const history = useHistory();
 
     const dispatch = useDispatch()
     const useSelec = useSelector(state => state)
 
     const toggleDrawer = () => {
 
-        props.history.push('/view-profile')
+        history.push('/view-profile')
     }
 
     const handleClick = () => {

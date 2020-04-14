@@ -8,35 +8,60 @@ import {
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { Link } from "react-router-dom";
-
+import {useDispatch} from 'react-redux';
 //import MaterialUiForm from './Test';
 import PhoneInput from '../../../node_modules/react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
+import {ADD_DRIVER} from '../../constant/const'
+
 
 
 export default function Profile(props){
+
+    const dispatch = useDispatch()
 
     const [value, setValue] = React.useState('м');
     const handleChange = event => {
         setValue(event.target.value);
     };
 
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+    const [selectedDate, setSelectedDate] = React.useState(Date.now());
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
 
     const sendForms = event => {
         event.preventDefault()
-        console.log('submit forms')
+        
+        const task = {
+            id: Date.now(),
+            
+            selectedDate: selectedDate,
+            value: value,
+            phone: phone,
+            phoneAdd: phoneAdd,
+            changeFamily,
+            changeName,
+            changeLastname
+        }
+       // console.log('submit forms')
+        //console.log(task)
+        dispatch({ type: ADD_DRIVER, payload: task })
     }
 
     const [phone, setPhone] = useState('')
+    const [phoneAdd, setPhoneAdd] = useState('')
+
 
     // const submitt = values => {
     //     window.alert (JSON.stringify (values));
     //   };
+
+    const [changeFamily, SetChangeFamily] = useState('');
+    const [changeName, SetChangeName] = useState('');
+    const [changeLastname, SetChangeLastname] = useState('');
+    
 
     return(
         <>
@@ -52,13 +77,14 @@ export default function Profile(props){
             </Breadcrumbs>
             <form className='profile-form' onSubmit={sendForms}>
                 <FormControl>
-                    <TextField id="profile-family" label="Фамлия" variant="outlined" />
+                    <TextField id="profile-family" name="family" label="Фамлия" variant="outlined" value={changeFamily} onChange={(e) => SetChangeFamily(e.target.value)} />
+                </FormControl>
+                <div>{changeFamily}</div>
+                <FormControl>
+                    <TextField id="profile-name" name="name" label="Имя" variant="outlined" value={changeName}  onChange={(e) => SetChangeName(e.target.value)}/>
                 </FormControl>
                 <FormControl>
-                    <TextField id="profile-name" label="Имя" variant="outlined" />
-                </FormControl>
-                <FormControl>
-                    <TextField id="profile-lastname" label="Отчество" variant="outlined" />
+                    <TextField id="profile-lastname" name="lastname" label="Отчество" variant="outlined" value={changeLastname} onChange={(e) => SetChangeLastname(e.target.value)}/>
                 </FormControl>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Gender</FormLabel>
@@ -71,8 +97,6 @@ export default function Profile(props){
                     <Grid container justify="space-around">
                         <KeyboardDatePicker
                         
-                        disableToolbar
-                        variant="inline"
                         format="MM/dd/yyyy"
                         margin="normal"
                         id="date-picker-inline"
@@ -85,9 +109,6 @@ export default function Profile(props){
                         /> 
                     </Grid>
                 </MuiPickersUtilsProvider>
-                <FormControl>
-                    <TextField id="profile-maprod" label="Место рождения" variant="outlined" />
-                </FormControl>
                 <PhoneInput
                     country='by'
                     regions={'europe'}
@@ -95,7 +116,13 @@ export default function Profile(props){
                     value={phone}
                     onChange={phone => setPhone(phone)}
                 />
-                <adress>{phone}</adress>
+                <PhoneInput
+                    country='by'
+                    regions={'europe'}
+                    onlyCountries={['ru', 'ua', 'by']}
+                    value={phoneAdd}
+                    onChange={phone => setPhoneAdd(phone)}
+                />
 
 
                 <Divider />
